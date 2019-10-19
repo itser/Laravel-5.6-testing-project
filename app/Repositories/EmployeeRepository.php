@@ -46,6 +46,6 @@ class EmployeeRepository extends BaseRepository
                 'employees.*',
                 'companies.name as company_name',
             ])
-            ->get();
+            ->paginate(config('adminlte.admin_per_page', '10'));
     }
 }

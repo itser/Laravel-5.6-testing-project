@@ -14,10 +14,10 @@
         @foreach($employees as $employee)
             <tr>
                 <td>{!! $employee->first_name !!}</td>
-            <td>{!! $employee->last_name !!}</td>
-            <td>{!! $employee->company_name !!}</td>
-            <td>{!! $employee->email !!}</td>
-            <td>{!! $employee->phone !!}</td>
+                <td>{!! $employee->last_name !!}</td>
+                <td>{!! $employee->company_name !!}</td>
+                <td>{!! $employee->email !!}</td>
+                <td>{!! $employee->phone !!}</td>
                 <td>
                     {!! Form::open(['route' => ['employees.destroy', $employee->id], 'method' => 'delete']) !!}
                     <div class='btn-group'>
@@ -30,5 +30,10 @@
             </tr>
         @endforeach
         </tbody>
+        <tfoot>
+        <tr>
+            <td colspan="6">{{ $employees->links() }}</td>
+        </tr>
+        </tfoot>
     </table>
 </div>
