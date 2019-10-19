@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateEmployeeRequest;
 use App\Http\Requests\UpdateEmployeeRequest;
 use App\Repositories\EmployeeRepository;
+use App\Repositories\CompanyRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
@@ -15,10 +16,16 @@ class EmployeeController extends AppBaseController
 {
     /** @var  EmployeeRepository */
     private $employeeRepository;
+    /** @var  CompanyRepository */
+    private $companyRepository;
 
-    public function __construct(EmployeeRepository $employeeRepo)
+    public function __construct(
+        EmployeeRepository $employeeRepo,
+        CompanyRepository $companyRepository
+    )
     {
         $this->employeeRepository = $employeeRepo;
+        $this->companyRepository = $companyRepository;
     }
 
     /**
@@ -30,7 +37,8 @@ class EmployeeController extends AppBaseController
     public function index(Request $request)
     {
         $this->employeeRepository->pushCriteria(new RequestCriteria($request));
-        $employees = $this->employeeRepository->all();
+
+        $employees = $this->employeeRepository->getEmployees();
 
         return view('employees.index')
             ->with('employees', $employees);
@@ -43,7 +51,10 @@ class EmployeeController extends AppBaseController
      */
     public function create()
     {
-        return view('employees.create');
+        //get data for company select
+        $companies = $this->companyRepository->getCompaniesForSelect();
+
+        return view('employees.create', compact('companies'));
     }
 
     /**
@@ -95,13 +106,16 @@ class EmployeeController extends AppBaseController
     {
         $employee = $this->employeeRepository->findWithoutFail($id);
 
+        //get data for company select
+        $companies = $this->companyRepository->getCompaniesForSelect();
+
         if (empty($employee)) {
             Flash::error('Employee not found');
 
             return redirect(route('employees.index'));
         }
 
-        return view('employees.edit')->with('employee', $employee);
+        return view('employees.edit', compact('employee', 'companies'));
     }
 
     /**

@@ -34,4 +34,18 @@ class EmployeeRepository extends BaseRepository
     {
         return Employee::class;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getEmployees()
+    {
+        return  Employee::query()
+            ->leftjoin('companies', 'companies.id', '=', 'employees.company_id')
+            ->select([
+                'employees.*',
+                'companies.name as company_name',
+            ])
+            ->get();
+    }
 }

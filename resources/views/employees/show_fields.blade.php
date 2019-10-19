@@ -18,8 +18,8 @@
 
 <!-- Company Id Field -->
 <div class="form-group">
-    {!! Form::label('company_id', 'Company Id:') !!}
-    <p>{!! $employee->company_id !!}</p>
+    {!! Form::label('company_id', 'Company:') !!}
+    <p>{!! $employee->company->name !!}</p>
 </div>
 
 <!-- Email Field -->

@@ -36,4 +36,15 @@ class CompanyRepository extends BaseRepository
     {
         return Company::class;
     }
+
+    /**
+     * Prepare data for company select
+     *
+     * @return mixed
+     */
+    public function getCompaniesForSelect()
+    {
+        return  Company::whereNull('deleted_at')->pluck('name', 'id');
+    }
+
 }

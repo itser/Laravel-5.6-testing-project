@@ -66,6 +66,4 @@ class Company extends Model
     public static $rules = [
         'name' => 'required'
     ];
-
-    
 }
