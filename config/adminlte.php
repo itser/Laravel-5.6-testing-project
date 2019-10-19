@@ -140,6 +140,13 @@ return [
             'label'       => 4,
             'label_color' => 'success',
         ],
+        [
+            'text'        => 'Employees',
+            'url'         => 'admin/employees',
+            'icon'        => 'far fa-file',
+            'label'       => 5,
+            'label_color' => 'success',
+        ],
         ['header' => 'account_settings'],
         [
             'text' => 'profile',
