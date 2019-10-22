@@ -17,7 +17,12 @@
                         <span class="column-title">{{ __('employees.company') }}</span>
                     </div>
                     <div class="filter-block">
-                        <input type="text" value="" class="form-control filter-field" placeholder="{{ __('general.search') }}" />
+                        <select data-column_number="6" class="form-control filter-field">
+                            <option value="">--- {{ __('general.search') }} ---</option>
+                            @foreach($companies as $companyId => $company)
+                                <option value="{{ $companyId }}">{{ $company }}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </th>
                 <th>
@@ -56,6 +61,8 @@
                     </div>
                     {!! Form::close() !!}
                 </td>
+                <!-- hidden columns for filters -->
+                <td>{{ $employee->company_id }}</td>
             </tr>
         @endforeach
         </tbody>

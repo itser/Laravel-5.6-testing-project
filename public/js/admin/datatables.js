@@ -21,9 +21,29 @@ $(document).ready(function () {
         e.stopPropagation();
     });
 
-    var employeesTable =  $('#employees-table').DataTable();
+    var employeesTable =  $('#employees-table').DataTable({
+        processing: true,
+        dom: '<"top">rt<"bottom"lip><"clear">',
+        language: {
+            processing: '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>',
+        },
+        "columnDefs": [
+            {
+                "targets": [5],
+                "sorting": false
+            },
+            {
+                "targets": [6],
+                "visible": false,
+            },
+        ]
+    });
 
     $('body').on('keyup', '.filter-block input.filter-field', function (e) {
+        searchByColumn($(this),employeesTable);
+    });
+
+    $('body').on('change', '.filter-block select.filter-field', function (e) {
         searchByColumn($(this),employeesTable);
     });
 });

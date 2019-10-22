@@ -40,8 +40,10 @@ class EmployeeController extends AppBaseController
 
         $employees = $this->employeeRepository->getEmployees();
 
-        return view('employees.index')
-            ->with('employees', $employees);
+        //get data for company select
+        $companies = $this->companyRepository->getCompaniesForSelect();
+
+        return view('employees.index', compact('employees','companies'));
     }
 
     /**
