@@ -1,13 +1,42 @@
 <div class="table-responsive">
-    <table class="table" id="employees-table">
+    <table class="table table-striped" id="employees-table">
         <thead>
             <tr>
-                <th>First Name</th>
-        <th>Last Name</th>
-        <th>Company</th>
-        <th>Email</th>
-        <th>Phone</th>
-                <th colspan="3">Action</th>
+                <th>
+                    <div class="table-header">
+                        <span class="column-title">{{ __('employees.first_name') }}</span>
+                    </div>
+                </th>
+                <th>
+                    <div class="table-header">
+                        <span class="column-title">{{ __('employees.last_name') }}</span>
+                    </div>
+                </th>
+                <th>
+                    <div class="table-header">
+                        <span class="column-title">{{ __('employees.company') }}</span>
+                    </div>
+                    <div class="filter-block">
+                        <input type="text" value="" class="form-control filter-field" placeholder="{{ __('general.search') }}" />
+                    </div>
+                </th>
+                <th>
+                    <div class="table-header">
+                        <span class="column-title">{{ __('employees.email') }}</span>
+                    </div>
+                    <div class="filter-block">
+                        <input type="text" value="" class="form-control filter-field" placeholder="{{ __('general.search') }}" />
+                    </div>
+                </th>
+                <th>
+                    <div class="table-header">
+                        <span class="column-title">{{ __('employees.phone') }}</span>
+                    </div>
+                    <div class="filter-block">
+                        <input type="text" value="" class="form-control filter-field" placeholder="{{ __('general.search') }}" />
+                    </div>
+                </th>
+                <th>{{ __('general.actions') }}</th>
             </tr>
         </thead>
         <tbody>
@@ -30,10 +59,8 @@
             </tr>
         @endforeach
         </tbody>
-        <tfoot>
-        <tr>
-            <td colspan="6">{{ $employees->links() }}</td>
-        </tr>
-        </tfoot>
     </table>
 </div>
+@section('scripts')
+    <script src="/js/admin/datatables.js"></script>
+@stop
